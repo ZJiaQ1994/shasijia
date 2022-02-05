@@ -43,7 +43,8 @@ def verify(request, _):
 
      `` request `` 请求对象
     """
-    print("##DEBUG {}".format(request))
+    print("##DEBUG {}".format(request.body))
+    logger.info("##DEBUG {}".format(request.body))
     rsp = JsonResponse({'code': 'test', 'errorMsg': 'shit'}, json_dumps_params={'ensure_ascii': False})
     return rsp
 

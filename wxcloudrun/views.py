@@ -37,6 +37,15 @@ def counter(request, _):
     logger.info('response result: {}'.format(rsp.content.decode('utf-8')))
     return rsp
 
+def verify(request, _):
+    """
+    获取当前计数
+
+     `` request `` 请求对象
+    """
+
+    rsp = JsonResponse({'code': 'test', 'errorMsg': request}, json_dumps_params={'ensure_ascii': False})
+    return rsp
 
 def get_count():
     """

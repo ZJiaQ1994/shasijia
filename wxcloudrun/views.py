@@ -59,7 +59,7 @@ def verify(request, _):
         print("##DEBUG {}".format(qd.get("echostr")))
         rsp=HttpResponse(echostr)
         return rsp
-    else：
+    else:
         msg = parse_message(request.data)
         print("msg: {}"msg)
         reply = TextReply(msg.content, msg)

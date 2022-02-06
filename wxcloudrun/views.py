@@ -27,6 +27,7 @@ def counter(request, _):
     """
 
     rsp = JsonResponse({'code': 0, 'errorMsg': ''}, json_dumps_params={'ensure_ascii': False})
+    print("##TYPE {}".format(type(request)))
     if request.method == 'GET' or request.method == 'get':
         rsp = get_count()
     elif request.method == 'POST' or request.method == 'post':
@@ -45,8 +46,8 @@ def verify(request, _):
     """
     #print("##DEBUG {}".format(request.body))
     #logger.info("##DEBUG {}".format(request.txt))
-    logger.info("##TYPE {}".format(type(request)))
-    logger.info("##TYPE2 {}".format(type(_)))
+    print("##TYPE {}".format(type(request)))
+    print("##TYPE2 {}".format(type(_)))
     rsp = JsonResponse({'code': 'test', 'errorMsg': 'shit'}, json_dumps_params={'ensure_ascii': False})
     return rsp
 

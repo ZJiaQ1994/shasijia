@@ -48,8 +48,13 @@ def verify(request, _):
     #logger.info("##DEBUG {}".format(request.txt))
     print("##TYPE {}".format(type(request)))
     print("##TYPE2 {}".format(type(_)))
-    rsp = JsonResponse({'code': 'test', 'errorMsg': 'shit'}, json_dumps_params={'ensure_ascii': False})
-    return rsp
+    qd=request.GET
+    print("##DEBUG {}".format(qd.get("signature")))
+    echostr = qd.get("echostr")
+    print("##DEBUG {}".format(qd.get("echostr")))
+    
+    #rsp = JsonResponse({'code': 'test', 'errorMsg': 'shit'}, json_dumps_params={'ensure_ascii': False})
+    return echostr
 
 def get_count():
     """

@@ -2,6 +2,7 @@ import json
 import logging
 
 from django.http import JsonResponse
+from django.http.response import HttpResponse
 from django.shortcuts import render
 from wxcloudrun.models import Counters
 
@@ -52,9 +53,10 @@ def verify(request, _):
     print("##DEBUG {}".format(qd.get("signature")))
     echostr = qd.get("echostr")
     print("##DEBUG {}".format(qd.get("echostr")))
-    
+    rsp=HttpResponse(echostr)
     #rsp = JsonResponse({'code': 'test', 'errorMsg': 'shit'}, json_dumps_params={'ensure_ascii': False})
-    return echostr
+    #rsp.body=echostr
+    return rsp
 
 def get_count():
     """

@@ -46,6 +46,7 @@ def verify(request, _):
     #print("##DEBUG {}".format(request.body))
     #logger.info("##DEBUG {}".format(request.txt))
     logger.info("##TYPE {}".format(type(request)))
+    logger.info("##TYPE2 {}".format(type(_)))
     rsp = JsonResponse({'code': 'test', 'errorMsg': 'shit'}, json_dumps_params={'ensure_ascii': False})
     return rsp
 

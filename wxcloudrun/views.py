@@ -61,7 +61,7 @@ def verify(request, _):
         return rsp
     else:
         msg = parse_message(request.data)
-        print("msg: {}"msg)
+        print("msg: {}".format(msg))
         reply = TextReply(msg.content, msg)
         res = reply.render()
         return res

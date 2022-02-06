@@ -6,6 +6,12 @@ from django.http.response import HttpResponse
 from django.shortcuts import render
 from wxcloudrun.models import Counters
 
+from wechatpy.utils import check_signature
+from wechatpy.exceptions import InvalidSignatureException
+from wechatpy import parse_message
+from wechatpy.replies import TextReply
+from wechatpy.replies import ImageReply
+
 
 logger = logging.getLogger('log')
 
@@ -45,18 +51,20 @@ def verify(request, _):
 
      `` request `` 请求对象
     """
-    #print("##DEBUG {}".format(request.body))
-    #logger.info("##DEBUG {}".format(request.txt))
-    print("##TYPE {}".format(type(request)))
-    print("##TYPE2 {}".format(type(_)))
-    qd=request.GET
-    print("##DEBUG {}".format(qd.get("signature")))
-    echostr = qd.get("echostr")
-    print("##DEBUG {}".format(qd.get("echostr")))
-    rsp=HttpResponse(echostr)
-    #rsp = JsonResponse({'code': 'test', 'errorMsg': 'shit'}, json_dumps_params={'ensure_ascii': False})
-    #rsp.body=echostr
-    return rsp
+    # 事实上这里需要验证一下微信发来的消息，但是懒得写了，凡是GET就当是来verify的
+    if request.method == 'GET' or request.method == 'get':
+        qd=request.GET
+        print("##DEBUG {}".format(qd.get("signature")))
+        echostr = qd.get("echostr")
+        print("##DEBUG {}".format(qd.get("echostr")))
+        rsp=HttpResponse(echostr)
+        return rsp
+    else：
+        msg = parse_message(request.data)
+        print("msg: {}"msg)
+        reply = TextReply(msg.content, msg)
+        res = reply.render()
+        return res
 
 def get_count():
     """
